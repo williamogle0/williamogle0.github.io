@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Plots Tonight</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+  </head>
+
+  <style>
+    body {
+        background-image: linear-gradient(to right, #0e101b, #140914);
+    }
+
+    #mainOutline{
+        display: block; 
+        justify-content: center;
+    }
+    #iconDiv {
+        width: fit-content;
+        margin: auto;
+        /* justify-self: center; */
+    }
+    #icon{
+        width: 45px;
+        margin: auto;
+        text-align: center;
+    }
+    #pltTntIconDiv{
+        justify-content: center;
+        width: fit-content;
+        /* justify-self: center; */
+        margin: auto;
+    }
+    #pltTntIconImg{
+        margin: auto;
+        text-align: center;
+    }
+    #usrOnlineDiv{
+        padding: 0px;
+        justify-self: center;
+        height: fit-content;
+    }
+    #usrImg{
+        
+    }
+    #usrOnlineNumber{
+        margin: 0px;
+    }
+    #usrOnlineNumText{
+        margin: 0px;
+        color: limegreen;
+        text-align: center;
+        font-size: small;
+    }
+    #promptDiv{
+        width: 25%;
+        margin: auto;
+    }
+    #promptHead{
+        color: white;
+        font-size: large;
+        text-align: left;
+    }
+    #promptBody{
+        color: grey;
+        text-align: left;
+    }
+    #inputDiv{
+        width: fit-content;
+        margin: auto;
+        margin-top: 10px;
+    }
+    #inputField{
+        background-color: #0e101b;
+        box-shadow: none;
+        border: 1px solid grey;
+        color: grey;
+        text-wrap: true;
+        border-radius: 5px;
+        width: 150px;
+        height: 50px;
+    }
+    h1 {
+        color: white;
+    }
+  </style>
+
+  <body>
+    <script src="index.js"></script>
+
+    <div id="mainOutline">
+        <div id="iconDiv">
+            <img id= "icon" src="./img/icon.png">
+        </div>
+        <div id="pltTntIconDiv">
+            <img id="pltTntIconImg" src="./img/plots tonight words.png">
+        </div>
+        <div id="usrOnlineDiv">
+            <img id="usrImg" src="./img/users online .png">
+            <div id="usrOnlineNumber">
+                <p id="usrOnlineNumText">
+                    99+ Users Online
+                </p>
+            </div>
+        </div>
+        <div id="promptDiv">
+            <div id="promptHead">
+                What are you doing tonight?
+            </div>
+            <div id="promptBody">
+                Share what you are doing tonight and discover the top 3 events happening near you on Plots!
+            </div>
+        </div>
+        <div id="inputDiv">
+            <input id="inputField" type="text">
+        </div>
+    </div>
+  </body>
+
+</html>
