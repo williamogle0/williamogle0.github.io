@@ -79,8 +79,14 @@
         color: grey;
         text-wrap: true;
         border-radius: 5px;
-        width: 150px;
+        width: 20vw;
         height: 50px;
+        outline: none;
+        resize: none;
+    }
+    #inputField:focus{
+        border: 2px solid grey;
+        color: white;
     }
     h1 {
         color: white;
@@ -114,7 +120,7 @@
             </div>
         </div>
         <div id="inputDiv">
-            <input id="inputField" type="text">
+            <textarea id="inputField" type="text" placeholder="I'm gonna party!"></textarea>
         </div>
     </div>
   </body>
