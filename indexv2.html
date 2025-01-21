@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <title>Plots Tonight</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+  </head>
+  <script>
+    function onSubmitPress(){
+        text = document.getElementById("inputField").value;
+        if (text != "" && text)
+        {
+            console.log("Recieved text of '" + text + "'!");
+            unlockEvents();
+            noInput();            
+        }        
+    }
+
+    function unlockEvents(){
+        blurDivs = Array.from(document.getElementsByClassName("blurDiv"));
+        blurDivs.forEach(element => {
+            element.style.backdropFilter = "none";
+        });
+    }
+
+    function noInput(){
+        promptDiv = document.getElementById("promptDiv");
+        promptDiv.innerHTML = "";
+        
+        headerDiv = document.createElement("div");
+        headerDiv.id = "promptBody";
+        headerDiv.innerHTML = "Message sent!";
+
+        bodyDiv = document.createElement("div");
+        bodyDiv.id = "promptHead";
+        bodyDiv.innerHTML = "Check out the 3 most popular events on Plots App!";
+
+        promptDiv.append(headerDiv);
+        promptDiv.append(bodyDiv);
+
+        promptDiv.style.border = "1px solid rgba(48, 44, 63, 1)";
+        promptDiv.style.borderRadius = "5px";
+        promptDiv.style.padding = "10px";
+        promptDiv.style.margin = "10px";
+        promptDiv.style.width = "auto";
+        promptDiv.style.maxWidth = "350px";
+        promptDiv.style.justifySelf = "center";
+
+        document.getElementById("unlockDiv").remove();
+        }
+  </script>
+
+  <style>
+    html {
+        background-color: #0e101b;
+        background-image: linear-gradient(to right, #0e101b, #140914);
+    }
+    body {
+        margin: 0; 
+        padding: 0;
+        height: 100%; 
+    }
+    #mainOutline{
+        display: block; 
+        justify-content: center;
+    }
+    #iconDiv {
+        width: fit-content;
+        margin: auto;
+        /* justify-self: center; */
+    }
+    #icon{
+        width: 35px;
+        margin: auto;
+        margin-top: 30px;
+        text-align: center;
+    }
+    #pltTntIconDiv{
+        justify-content: center;
+        width: 250px;
+        /* justify-self: center; */
+        margin: auto;
+    }
+    #pltTntIconImg{
+        margin: auto;
+        text-align: center;
+        width: 100%;
+    }
+    #usrOnlineDiv{
+        padding: 0px;
+        margin: auto;
+        height: fit-content;
+        width: 250px;
+    }
+    #usrImg{
+        width: 100%;
+    }
+    #usrOnlineNumberDivDiv{
+        margin: 0px;
+    }
+    #usrOnlineNumText{
+        margin: 0px;
+        color: limegreen;
+        text-align: center;
+        font-size: small;
+        font-family: Poppins;
+    }
+    #promptDiv{
+        width: 350px;
+        margin: auto;
+        margin-top: 25px;
+    }
+    #promptHead{
+        color: white;
+        font-family: Poppins;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+
+    }
+    #promptBody{
+        color: rgba(162, 169, 194, 1);     
+        font-family: Poppins;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 21px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+
+    }
+    #inputField{
+        margin-top: 10px;
+        background-color: #0e101b;
+        box-shadow: none;
+        border: 1px solid grey;
+        color: white;
+        border-radius: 5px;
+        width: 100%;
+        height: 70px;
+        outline: none;
+        resize: none;
+    }
+    #unlockDiv{
+        width: 350px;
+        margin: auto;
+    }
+    #unlockBtn {
+        margin-top: 20px;
+        width: 100%;
+        height: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        /* border: none; */
+        color: white;
+        font-family: Poppins;
+        font-size: large;
+        background: rgba(69, 74, 92, 1);
+        position: relative; /* Ensure positioning for the pseudo-element */
+    }
+
+    #unlockBtn::after {
+        content: "";
+        width: 100%; /* Match the width of the button */
+        height: 100%; /* Match the height of the button */
+        border-radius: 10px;
+        position: absolute;
+        top: 10%; /* Position it directly below the button */
+        left: 0; 
+        background: rgba(69, 74, 92, 1);
+        z-index: -1; 
+    }
+    .colorBtn{
+        background: linear-gradient(97.61deg, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #F25C4F 100%) !important;
+    }
+    .colorBtn::after{
+        background: linear-gradient(276.19deg, #A40B0C 1.58%, #920071 26.31%, #730086 69.78%, #0C2EA0 93.06%) !important;
+    }
+
+    #eventsDiv{
+        width: 350px;
+        margin: auto;
+        margin-bottom: 40px;
+    }
+    #eventsTitle{
+        margin-top: 35px;
+        margin-bottom: none;
+    }
+    #top3Events {        
+        position: relative;
+        display: inline-flex; 
+        padding: 1px; 
+        border: solid 1px transparent; 
+        border-radius: 10px; 
+        background-image: 
+            linear-gradient(black, black), 
+            radial-gradient(circle at top left, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #587AED 100%) !important;
+        background-origin: border-box !important;
+        background-clip: content-box, border-box !important; 
+        color: white;
+        font-family: Poppins, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21px;
+        text-align: center;
+        background: none;
+        width: 119px;
+    }
+    #top3Text{
+        margin: auto;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        padding: 0;
+    }
+    .eventDiv{
+        position: relative;
+        width: 100%;
+        height: fit-content;
+        background: linear-gradient(180deg, rgba(8, 7, 10, 0) 15.57%, #08070A 81.8%);
+        border: 1px solid grey;
+        border-radius: 10px;
+        margin-top: 20px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    .blurDiv{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(64px);
+        z-index: 5;
+    }
+    .eventImg{
+        position: relative;
+        width: 100%;
+        z-index: -1;
+    }
+    .eventNameImg{
+        position: absolute;
+        width: 100%;
+        left: 0%;
+        bottom: 25%;
+    }
+    .attendingEventImg{
+        position: absolute;
+        width: 100%;
+        left: 0%;
+        bottom: 0%;
+        margin: 2px;
+    }
+    #eventsHeader{
+        margin: none;
+    }
+    h1 {
+        color: white;
+    }
+  </style>
+
+  <body>
+    <script src="index.js"></script>
+
+    <div id="mainOutline">
+        <div id="iconDiv">
+            <img id= "icon" src="./img/icon.png">
+        </div>
+        <div id="pltTntIconDiv">
+            <img id="pltTntIconImg" src="./img/whatsplotstonight.png">
+        </div>
+        <div id="usrOnlineDiv">
+            <img id="usrImg" src="./img/activePfps.png">
+            <div id="usrOnlineNumberDiv">
+                <p id="usrOnlineNumText">
+                    99+ Users Online
+                </p>
+            </div>
+        </div>
+        <div id="promptDiv">
+            <div id="promptHead">
+                What are you doing tonight?
+            </div>
+            <div id="promptBody">
+                Share what you are doing tonight and discover the top 3 events happening near you on Plots!
+            </div>
+            <textarea id="inputField" type="text" placeholder="I'm gonna party!"></textarea>
+        </div>
+        <div id="unlockDiv">
+            <button id="unlockBtn" type="button" onclick="onSubmitPress()">Unlock top 3 events now</button>
+        </div>
+        <div id="eventsDiv">
+            <div id="eventsTitle">
+                <h1 id="eventsHeader">
+                    Discover on Plots
+                </h1>
+                <div id="top3Events">
+                    <p id="top3Text">Top 3 on Plots</p>
+                </div>
+            </div>
+            <div class="eventDiv">
+                <img class="eventImg" src="./img/plotsEvent1.png">
+                <img class="eventNameImg" src="./img/eventName.png">
+                <img class="attendingEventImg" src="./img/attendingEvent.png">
+                <div class="blurDiv"></div>
+            </div>
+            <!-- <div class="eventDiv">
+                <img class="eventImg" src="./img/plotsEvent2.png">
+                <img class="eventNameImg" src="./img/eventName.png">
+                <img class="attendingEventImg" src="./img/attendingEvent.png">
+                <div class="blurDiv"></div>
+            </div>
+            <div class="eventDiv">
+                <img class="eventImg" src="./img/plotsEvent3.png">
+                <img class="eventNameImg" src="./img/eventName.png">
+                <img class="attendingEventImg" src="./img/attendingEvent.png">
+                <div class="blurDiv"></div> -->
+            </div>
+        </div>
+        <div style="height: 20px;">
+        </div>
+    </div>
+  </body>
+  <script>
+    document.getElementById("inputField").addEventListener("input", () => {
+        if (document.getElementById("inputField").value.trim()) {
+            document.getElementById("unlockBtn").classList.add("colorBtn");
+        } else{
+            document.getElementById("unlockBtn").classList.remove("colorBtn");
+        }
+    });
+  </script>
+</html>
