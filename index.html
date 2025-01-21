@@ -19,28 +19,53 @@
         {
             console.log("Recieved text of '" + text + "'!");
             unlockEvents();
-            noInput();
+            noInput();            
         }        
     }
 
     function unlockEvents(){
-
+        blurDivs = Array.from(document.getElementsByClassName("blurDiv"));
+        blurDivs.forEach(element => {
+            element.style.backdropFilter = "none";
+        });
     }
 
     function noInput(){
+        promptDiv = document.getElementById("promptDiv");
+        promptDiv.innerHTML = "";
+        
+        headerDiv = document.createElement("div");
+        headerDiv.id = "promptBody";
+        headerDiv.innerHTML = "Message sent!";
 
-    }
+        bodyDiv = document.createElement("div");
+        bodyDiv.id = "promptHead";
+        bodyDiv.innerHTML = "Check out the 3 most popular events on Plots App!";
+
+        promptDiv.append(headerDiv);
+        promptDiv.append(bodyDiv);
+
+        promptDiv.style.border = "1px solid rgba(48, 44, 63, 1)";
+        promptDiv.style.borderRadius = "5px";
+        promptDiv.style.padding = "10px";
+        promptDiv.style.margin = "10px";
+        promptDiv.style.width = "auto";
+        promptDiv.style.maxWidth = "350px";
+        promptDiv.style.justifySelf = "center";
+
+        document.getElementById("unlockDiv").remove();
+        }
   </script>
 
   <style>
     html {
-        background-color: black;
+        background-color: #0e101b;
+        background-image: linear-gradient(to right, #0e101b, #140914);
     }
-    html, body {
+    body {
         margin: 0; 
         padding: 0;
         height: 100%; 
-        background-image: linear-gradient(to right, #0e101b, #140914); 
     }
     #mainOutline{
         display: block; 
@@ -52,14 +77,14 @@
         /* justify-self: center; */
     }
     #icon{
-        width: 45px;
+        width: 35px;
         margin: auto;
-        margin-top: 10px;
+        margin-top: 30px;
         text-align: center;
     }
     #pltTntIconDiv{
         justify-content: center;
-        width: 350px;
+        width: 250px;
         /* justify-self: center; */
         margin: auto;
     }
@@ -70,9 +95,9 @@
     }
     #usrOnlineDiv{
         padding: 0px;
-        justify-self: center;
+        margin: auto;
         height: fit-content;
-        width: 350px;
+        width: 250px;
     }
     #usrImg{
         width: 100%;
@@ -134,12 +159,13 @@
         margin-top: 20px;
         width: 100%;
         height: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 10px;
-        border: none;
+        /* border: none; */
         color: white;
         font-family: Poppins;
         font-size: large;
-        background: linear-gradient(97.61deg, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #F25C4F 100%);
+        background: rgba(69, 74, 92, 1);
         position: relative; /* Ensure positioning for the pseudo-element */
     }
 
@@ -149,10 +175,16 @@
         height: 100%; /* Match the height of the button */
         border-radius: 10px;
         position: absolute;
-        top: 20%; /* Position it directly below the button */
+        top: 10%; /* Position it directly below the button */
         left: 0; 
-        background: linear-gradient(276.19deg, #A40B0C 1.58%, #920071 26.31%, #730086 69.78%, #0C2EA0 93.06%);
+        background: rgba(69, 74, 92, 1);
         z-index: -1; 
+    }
+    .colorBtn{
+        background: linear-gradient(97.61deg, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #F25C4F 100%) !important;
+    }
+    .colorBtn::after{
+        background: linear-gradient(276.19deg, #A40B0C 1.58%, #920071 26.31%, #730086 69.78%, #0C2EA0 93.06%) !important;
     }
 
     #eventsDiv{
@@ -200,6 +232,14 @@
         margin-top: 20px;
         overflow: hidden;
         margin-bottom: 20px;
+    }
+    .blurDiv{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(64px);
+        z-index: 5;
     }
     .eventImg{
         position: relative;
@@ -270,21 +310,32 @@
                 <img class="eventImg" src="./img/plotsEvent1.png">
                 <img class="eventNameImg" src="./img/eventName.png">
                 <img class="attendingEventImg" src="./img/attendingEvent.png">
+                <div class="blurDiv"></div>
             </div>
             <div class="eventDiv">
                 <img class="eventImg" src="./img/plotsEvent2.png">
                 <img class="eventNameImg" src="./img/eventName.png">
                 <img class="attendingEventImg" src="./img/attendingEvent.png">
+                <div class="blurDiv"></div>
             </div>
             <div class="eventDiv">
                 <img class="eventImg" src="./img/plotsEvent3.png">
                 <img class="eventNameImg" src="./img/eventName.png">
                 <img class="attendingEventImg" src="./img/attendingEvent.png">
+                <div class="blurDiv"></div>
             </div>
         </div>
         <div style="height: 20px;">
         </div>
     </div>
   </body>
-
+  <script>
+    document.getElementById("inputField").addEventListener("input", () => {
+        if (document.getElementById("inputField").value.trim()) {
+            document.getElementById("unlockBtn").classList.add("colorBtn");
+        } else{
+            document.getElementById("unlockBtn").classList.remove("colorBtn");
+        }
+    });
+  </script>
 </html>
