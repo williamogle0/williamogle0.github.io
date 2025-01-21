@@ -48,7 +48,9 @@
         promptDiv.style.border = "1px solid rgba(48, 44, 63, 1)";
         promptDiv.style.borderRadius = "5px";
         promptDiv.style.padding = "10px";
-        promptDiv.style.margin = "10px";
+        promptDiv.style.margin = "max(10px, auto)";
+        promptDiv.style.marginTop = "10px";
+        promptDiv.style.marginBottom = "10px";
         promptDiv.style.width = "auto";
         promptDiv.style.maxWidth = "350px";
         promptDiv.style.justifySelf = "center";
@@ -87,6 +89,7 @@
         width: 250px;
         /* justify-self: center; */
         margin: auto;
+        margin-top: 30px;
     }
     #pltTntIconImg{
         margin: auto;
@@ -120,13 +123,12 @@
     #promptHead{
         color: white;
         font-family: Poppins;
-        font-size: 16px;
+        font-size: 24px;
         font-weight: 700;
-        line-height: 24px;
+        line-height: 36px;
         text-align: left;
         text-underline-position: from-font;
         text-decoration-skip-ink: none;
-
     }
     #promptBody{
         color: rgba(162, 169, 194, 1);     
@@ -151,52 +153,10 @@
         outline: none;
         resize: none;
     }
-    #unlockDiv{
-        width: 350px;
-        margin: auto;
-    }
-    #unlockBtn {
-        margin-top: 20px;
-        width: 100%;
-        height: 50px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 10px;
-        /* border: none; */
-        color: white;
-        font-family: Poppins;
-        font-size: large;
-        background: rgba(69, 74, 92, 1);
-        position: relative; /* Ensure positioning for the pseudo-element */
-    }
+    #sendBtn{
 
-    #unlockBtn::after {
-        content: "";
-        width: 100%; /* Match the width of the button */
-        height: 100%; /* Match the height of the button */
-        border-radius: 10px;
-        position: absolute;
-        top: 10%; /* Position it directly below the button */
-        left: 0; 
-        background: rgba(69, 74, 92, 1);
-        z-index: -1; 
     }
-    .colorBtn{
-        background: linear-gradient(97.61deg, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #F25C4F 100%) !important;
-    }
-    .colorBtn::after{
-        background: linear-gradient(276.19deg, #A40B0C 1.58%, #920071 26.31%, #730086 69.78%, #0C2EA0 93.06%) !important;
-    }
-
-    #eventsDiv{
-        width: 350px;
-        margin: auto;
-        margin-bottom: 40px;
-    }
-    #eventsTitle{
-        margin-top: 35px;
-        margin-bottom: none;
-    }
-    #top3Events {        
+    .inputSuggestion{
         position: relative;
         display: inline-flex; 
         padding: 1px; 
@@ -215,6 +175,59 @@
         text-align: center;
         background: none;
         width: 119px;
+    }
+    #unlockDiv{
+        width: 350px;
+        margin: auto;
+    }
+    #sendBtn {
+        margin-top: 20px;
+        width: 100%;
+        height: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        /* border: none; */
+        color: white;
+        font-family: Poppins;
+        font-size: large;
+        background: rgba(69, 74, 92, 1);
+        position: relative; /* Ensure positioning for the pseudo-element */
+    }
+    .colorBtn{
+        background: linear-gradient(97.61deg, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #F25C4F 100%) !important;
+    }
+    .colorBtn::after{
+        background: linear-gradient(276.19deg, #A40B0C 1.58%, #920071 26.31%, #730086 69.78%, #0C2EA0 93.06%) !important;
+    }
+
+    #eventsDiv{
+        width: 350px;
+        margin: auto;
+        margin-bottom: 40px;
+    }
+    #eventsTitle{
+        margin-top: 35px;
+        margin-bottom: none;
+    }
+    #smallIcon{
+        height: 24px;
+    }
+    #top3Events {        
+        position: relative;
+        display: inline-flex; 
+        padding: 1px; 
+        border: solid 1px grey; 
+        border-radius: 10px; 
+        background-image: linear-gradient(black, black);
+        color: white;
+        font-family: Poppins, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21px;
+        text-align: center;
+        background: none;
+        width: 202px;
+        padding: 5px;
     }
     #top3Text{
         margin: auto;
@@ -271,63 +284,72 @@
     <script src="index.js"></script>
 
     <div id="mainOutline">
-        <div id="iconDiv">
-            <img id= "icon" src="./img/icon.png">
-        </div>
         <div id="pltTntIconDiv">
             <img id="pltTntIconImg" src="./img/whatsplotstonight.png">
         </div>
-        <div id="usrOnlineDiv">
-            <img id="usrImg" src="./img/activePfps.png">
-            <div id="usrOnlineNumberDiv">
-                <p id="usrOnlineNumText">
-                    99+ Users Online
-                </p>
+        <div id="eventsDiv">
+            <div id="eventsTitle">
+                <div id="top3Events">
+                    <img id="smallIcon" src="./img/icon.png">
+                    <p id="top3Text">Top 3 weekend events</p>
+                </div>
             </div>
         </div>
         <div id="promptDiv">
             <div id="promptHead">
-                What are you doing tonight?
+                Share your weekend plans to unlock the top 3 events!
             </div>
-            <div id="promptBody">
-                Share what you are doing tonight and discover the top 3 events happening near you on Plots!
+            <div id="inputDiv">
+                <textarea id="inputField" type="text" placeholder="I'm gonna party!"></textarea>
+                <button id="sendBtn" type="button" onclick="onSubmitPress()">^|</button>
             </div>
-            <textarea id="inputField" type="text" placeholder="I'm gonna party!"></textarea>
-        </div>
-        <div id="unlockDiv">
-            <button id="unlockBtn" type="button" onclick="onSubmitPress()">Unlock top 3 events now</button>
-        </div>
-        <div id="eventsDiv">
-            <div id="eventsTitle">
-                <h1 id="eventsHeader">
-                    Discover on Plots
-                </h1>
-                <div id="top3Events">
-                    <p id="top3Text">Top 3 on Plots</p>
+            <div id="suggestionDiv">
+                <div class="inputSuggestion">
+                    Out with friends
+                </div>
+                <div class="inputSuggestion">
+                    Hitting the club
+                </div>
+                <div class="inputSuggestion">
+                    Dining out
+                </div>
+                <div class="inputSuggestion">
+                    Exploring
                 </div>
             </div>
-            <div class="eventDiv">
-                <img class="eventImg" src="./img/plotsEvent1.png">
-                <img class="eventNameImg" src="./img/eventName.png">
-                <img class="attendingEventImg" src="./img/attendingEvent.png">
-                <div class="blurDiv"></div>
-            </div>
-            <!-- <div class="eventDiv">
-                <img class="eventImg" src="./img/plotsEvent2.png">
-                <img class="eventNameImg" src="./img/eventName.png">
-                <img class="attendingEventImg" src="./img/attendingEvent.png">
-                <div class="blurDiv"></div>
-            </div>
-            <div class="eventDiv">
-                <img class="eventImg" src="./img/plotsEvent3.png">
-                <img class="eventNameImg" src="./img/eventName.png">
-                <img class="attendingEventImg" src="./img/attendingEvent.png">
-                <div class="blurDiv"></div> -->
-            </div>
         </div>
-        <div style="height: 20px;">
-        </div>
+        <div style="height: 20px;"></div>
     </div>
+
+    <!-- <div class="eventDiv">
+        <img class="eventImg" src="./img/plotsEvent1.png">
+        <img class="eventNameImg" src="./img/eventName.png">
+        <img class="attendingEventImg" src="./img/attendingEvent.png">
+        <div class="blurDiv"></div>
+    </div>
+    <div class="eventDiv">
+        <img class="eventImg" src="./img/plotsEvent2.png">
+        <img class="eventNameImg" src="./img/eventName.png">
+        <img class="attendingEventImg" src="./img/attendingEvent.png">
+        <div class="blurDiv"></div>
+    </div>
+    <div class="eventDiv">
+        <img class="eventImg" src="./img/plotsEvent3.png">
+        <img class="eventNameImg" src="./img/eventName.png">
+        <img class="attendingEventImg" src="./img/attendingEvent.png">
+        <div class="blurDiv"></div>
+    </div> -->
+
+
+    <!-- <div id="usrOnlineDiv">
+        <img id="usrImg" src="./img/activePfps.png">
+        <div id="usrOnlineNumberDiv">
+            <p id="usrOnlineNumText">
+                99+ Users Online
+            </p>
+        </div>
+    </div> -->
+
   </body>
   <script>
     document.getElementById("inputField").addEventListener("input", () => {
