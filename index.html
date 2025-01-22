@@ -51,7 +51,7 @@
         promptDiv.style.margin = "max(10px, auto)";
         promptDiv.style.marginTop = "10px";
         promptDiv.style.marginBottom = "10px";
-        promptDiv.style.width = "auto";
+        promptDiv.style.width = "98%";
         promptDiv.style.maxWidth = "350px";
         promptDiv.style.justifySelf = "center";
 
@@ -115,7 +115,8 @@
         font-family: Poppins;
     }
     #promptDiv{
-        width: 350px;
+        width: 98%;
+        max-width: 350px;
         margin: auto;
         margin-top: 25px;
     }
@@ -145,6 +146,7 @@
         margin-top: 10px;
         background-color: #0e101b;
         box-shadow: none;
+        box-sizing: border-box;
         border: 1px solid grey;
         color: white;
         border-radius: 5px;
@@ -154,8 +156,10 @@
         resize: none;
     }
     #unlockDiv{
-        width: 350px;
+        width: 98%;
+        max-width: 350px;
         margin: auto;
+        box-sizing: border-box;
     }
     #unlockBtn {
         margin-top: 20px;
@@ -163,6 +167,7 @@
         height: 50px;
         border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 10px;
+        box-sizing: border-box;
         /* border: none; */
         color: white;
         font-family: Poppins;
@@ -190,7 +195,8 @@
     }
 
     #eventsDiv{
-        width: 350px;
+        width: 100%;
+        max-width: 350px;
         margin: auto;
         margin-bottom: 40px;
     }
@@ -226,7 +232,7 @@
     }
     .eventDiv{
         position: relative;
-        width: 100%;
+        width: 98%;
         height: fit-content;
         background: linear-gradient(180deg, rgba(8, 7, 10, 0) 15.57%, #08070A 81.8%);
         border: 1px solid grey;
@@ -234,6 +240,7 @@
         margin-top: 20px;
         overflow: hidden;
         margin-bottom: 20px;
+        box-sizing: border-box;
     }
     .blurDiv{
         position: absolute;
@@ -270,8 +277,6 @@
   </style>
 
   <body>
-    <script src="index.js"></script>
-
     <div id="mainOutline">
         <div id="iconDiv">
             <img id= "icon" src="./img/icon.png">
