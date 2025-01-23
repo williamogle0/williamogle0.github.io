@@ -26,7 +26,7 @@
     }
 
     function unlockEvents(){
-        blurDivs = Array.from(document.getElementsByClassName("blurDiv"));
+        blurDivs = Array.from(document.getElementsByClassName("blur-overlay"));
         blurDivs.forEach(element => {
             element.style.backdropFilter = "none";
         });
@@ -34,60 +34,52 @@
 
     function noInput(){
         promptDiv = document.getElementById("promptDiv");
-        promptDiv.innerHTML = "";
+        promptDiv.remove();
         
-        headerDiv = document.createElement("div");
-        headerDiv.id = "promptBody";
-        headerDiv.innerHTML = "Message sent!";
+        partyDiv = document.createElement("div");
+        partyDiv.id = "partyDiv";
+        
+        partyGif = document.createElement("img");
+        partyGif.src = "./img/party.gif";
+        partyGif.id = "partyGif";
 
-        bodyDiv = document.createElement("div");
-        bodyDiv.id = "promptHead";
-        bodyDiv.innerHTML = "Check out the 3 most popular events on Plots App!";
+        partyText = document.createElement("p");
+        partyText.id = "partyText";
+        partyText.innerText = "Let's Party!";
 
-        promptDiv.append(headerDiv);
-        promptDiv.append(bodyDiv);
+        partyDiv.append(partyGif);
+        partyDiv.append(partyText);
+        document.getElementById("mainOutline").append(partyDiv);
+    }
 
-        promptDiv.style.border = "1px solid rgba(48, 44, 63, 1)";
-        promptDiv.style.borderRadius = "5px";
-        promptDiv.style.padding = "10px";
-        promptDiv.style.margin = "max(10px, auto)";
-        promptDiv.style.marginTop = "10px";
-        promptDiv.style.marginBottom = "10px";
-        promptDiv.style.width = "auto";
-        promptDiv.style.maxWidth = "350px";
-        promptDiv.style.justifySelf = "center";
-
-        document.getElementById("unlockDiv").remove();
+    function inputSuggestion(text){
+        textarea = document.getElementById("inputField");
+        
+        if (textarea.value.trim() == ""){
+            textarea.value = text;
+            greySuggestion();
         }
+    }
 
-        function inputSuggestion(text){
-            textarea = document.getElementById("inputField");
-            
-            if (textarea.value.trim() == ""){
-                textarea.value = text;
-                greySuggestion();
-            }
-        }
+    function greySuggestion(){
+        suggestions = Array.from(document.getElementsByClassName("inputSuggestion"));
+        suggestions.forEach(element =>{
+            element.style.color = "rgba(69, 74, 92, 1)";
+            element.style.border = "1px solid rgba(69, 74, 92, 1)";
+            element.style.backgroundImage = "linear-gradient(black, black)";
+        });
+        document.getElementById("sendBtn").classList.add("colorBtn");
+        document.getElementById("btnImg").src = "./img/VectorWhite.svg";
+    }
 
-        function greySuggestion(){
-            suggestions = Array.from(document.getElementsByClassName("inputSuggestion"));
-            suggestions.forEach(element =>{
-                element.style.color = "rgba(69, 74, 92, 1)";
-                element.style.border = "1px solid rgba(69, 74, 92, 1)";
-                element.style.backgroundImage = "linear-gradient(black, black)";
-            });
-            document.getElementById("sendBtn").classList.add("colorBtn");
-            document.getElementById("btnImg").src = "./img/VectorWhite.svg";
-        }
-
-        function ungreySuggestion(){
-            suggestions = Array.from(document.getElementsByClassName("inputSuggestion"));
-            suggestions.forEach(element =>{
-                element.style.color = "white";
-                element.style.border = "1px solid transparent";
-                element.style.backgroundImage = "linear-gradient(black, black), radial-gradient(circle at top left, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #587AED 100%)";
-            });
-        }
+    function ungreySuggestion(){
+        suggestions = Array.from(document.getElementsByClassName("inputSuggestion"));
+        suggestions.forEach(element =>{
+            element.style.color = "white";
+            element.style.border = "1px solid transparent";
+            element.style.backgroundImage = "linear-gradient(black, black), radial-gradient(circle at top left, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #587AED 100%)";
+        });
+    }
   </script>
 
   <style>
@@ -121,8 +113,7 @@
         width: 200px;
         /* justify-self: center; */
         margin: auto;
-        margin-top: 40px;
-        margin-bottom: 30px;
+        margin-top: 20px;
     }
     #pltTntIconImg{
         margin: auto;
@@ -152,7 +143,6 @@
         width: 95%;
         max-width: 450px;
         margin: auto;
-        margin-top: 25px;
     }
     #promptHead{
         color: white;
@@ -292,7 +282,8 @@
     #eventsContainer{
         position: relative;
         width: 95vw;
-        height: 150px;
+        max-width: 450px;
+        height: 60vh;
         /* overflow: hidden; */
         display: flex;
         flex-direction: column;
@@ -304,7 +295,7 @@
     #eventWrapper{
         display: flex;
         scroll-snap-type: x mandatory; /* Enable snapping */
-        overflow-x: auto; /* Allow horizontal scrolling */
+        overflow-x: auto; /*Allow horizontal scrolling */
         width: 100%;
         height: 80%;
         scroll-behavior: smooth;
@@ -318,17 +309,15 @@
         display: none; /* For Chrome, Safari, and Edge */
     }
     .eventContainer{
-        flex: 0 0 98%; /* Each item takes full width */
+        flex: 0 0 60%; /* Each item takes full width */
         height: 95%;
-        display: flex;
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 70% 15% 15%; 
         align-items: center;
         justify-content: left;
         color: white;
         font-size: 2rem;
-        border: 1px solid rgba(113, 120, 143, 1);
-        border-radius: 10px;
-        scroll-snap-align: center; /* Snap to center */
-        scroll-snap-stop: always; 
         width: 50vw;
         margin-right: 2px;
         padding: 2px;
@@ -343,42 +332,97 @@
 
     }
     .eventImg{
-        height: 95%;
-        overflow: hidden;
+        height: 100%;
+        width: 100%;
+    } 
+    .eventImgDiv{
+        display: block;
+        position: relative;
+        /* height: 100%; */
+        width: 100%;
+        border: 1px solid rgba(113, 120, 143, 1);
         border-radius: 10px;
-        margin-left: 5px;
+        overflow: hidden;
     }
-    .lockStatus{
-
+    .titleDiv{
+        position: relative;
+        grid-row: 2;
     }
     .eventTitle{
-
+        font-family: Poppins;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 24px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        grid-row: 2;
+        grid-column: 2;
+        margin: 10px 0px 10px;
     }
     .attendingDiv{
-
+        height: 30px;
+        display: flex;
+        flex-direction: row;
+        align-content: space-around;
+        /* justify-content: space-around; */
+        grid-row: 3;
+        width: 100%;
     }
     .attendingPfp{
 
     }
     .attendingText{
+        height: 100%;
+        align-content: center;
+        color: rgba(81, 219, 80, 1);
+        font-family: Poppins;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 18px;
+        text-align: center;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
+        width: fit-content;
+        margin: 0;
+    }
+    .blur-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; /* Fill the parent container */
+        height: 100%; /* Fill the parent container */
+        /* backdrop-filter: blur(10px); Adjust the blur intensity */
+        /* -webkit-backdrop-filter: blur(10px); For Safari  */
+        z-index: 1; /* Ensure it's behind the content */
+        pointer-events: none; 
+    }
 
-    }
-    .dot-indicator {
-        /* position: absolute; */
-        /* bottom: 20px; */
-        margin-top: 10px;
+    #partyDiv{
         display: flex;
-        gap: 10px;
+        height: 32px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+        align-content: center;
+        justify-content: center;
+        flex-direction: row;
     }
-    .dot {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background-color: gray;
-        transition: background-color 0.3s ease;
+    #partyGif{
+        height: 100%;
+        margin-right: 5px;
     }
-    .dot.active {
-        background-color: white;
+    #partyText{
+        margin: 0;
+        align-content: center;
+        color: white;
+        font-family: Poppins;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 16px;
+        text-align: left;
+        text-underline-position: from-font;
+        text-decoration-skip-ink: none;
     }
     #eventsTitle{
         margin: none;
@@ -395,12 +439,12 @@
         background-image: linear-gradient(black, black);
         color: white;
         font-family: Poppins, sans-serif;
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 600;
         line-height: 15px;
         text-align: center;
         background: none;
-        width: 150px;
+        width: 170px;
         padding: 3px;
         margin-left: 5px;
     }
@@ -453,8 +497,6 @@
   </style>
 
   <body>
-    <script src="index.js"></script>
-
     <div id="mainOutline">
         <div id="pltTntIconDiv">
             <img id="pltTntIconImg" src="./img/whatsplotstonight.png">
@@ -467,19 +509,47 @@
             <div id = "eventsContainer">
                 <div id="eventWrapper">
                     <div id="event1" class="eventContainer">
-                        <img class="eventImg" src="./img/plotsEvent1.png">
+                        <div class="eventImgDiv">
+                            <img class="eventImg" src="./img/plotsEvent1.png">
+                            <div class="blur-overlay"></div>
+                        </div>
+                        <div class="titleDiv">
+                            <p class="eventTitle">ALIVE: Underwear x New Life</p>
+                            <div class="blur-overlay"></div>
+                        </div>
+                        <div class="attendingDiv">
+                            <img class="attendingPfp" src="./img/v2Pfp.png">
+                            <p class="attendingText">200+ attendees</p>
+                        </div>
                     </div>
                     <div id="event2" class="eventContainer">
-                        <img class="eventImg" src="./img/plotsEvent2.png">
+                        <div class="eventImgDiv">
+                            <img class="eventImg" src="./img/plotsEvent2.png">
+                            <div class="blur-overlay"></div>
+                        </div>
+                        <div class="titleDiv">
+                            <p class="eventTitle">ALIVE: Underwear x New Life</p>
+                            <div class="blur-overlay"></div>
+                        </div>
+                        <div class="attendingDiv">
+                            <img class="attendingPfp" src="./img/v2Pfp.png">
+                            <p class="attendingText">200+ attendees</p>
+                        </div>
                     </div>
                     <div id="event3" class="eventContainer">
-                        <img class="eventImg" src="./img/plotsEvent3.png">
+                        <div class="eventImgDiv">
+                            <img class="eventImg" src="./img/plotsEvent3.png">
+                            <div class="blur-overlay"></div>
+                        </div>
+                        <div class="titleDiv">
+                            <p class="eventTitle">ALIVE: Underwear x New Life</p>
+                            <div class="blur-overlay"></div>
+                        </div>
+                        <div class="attendingDiv">
+                            <img class="attendingPfp" src="./img/v2Pfp.png">
+                            <p class="attendingText">200+ attendees</p>
+                        </div>
                     </div>
-                </div>
-                <div class="dot-indicator">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
                 </div>
             </div>
         </div>
@@ -516,37 +586,7 @@
                 </div>
             </div>
         </div>
-        <div style="height: 20px;"></div>
     </div>
-
-    <!-- <div class="eventDiv">
-        <img class="eventImg" src="./img/plotsEvent1.png">
-        <img class="eventNameImg" src="./img/eventName.png">
-        <img class="attendingEventImg" src="./img/attendingEvent.png">
-        <div class="blurDiv"></div>
-    </div>
-    <div class="eventDiv">
-        <img class="eventImg" src="./img/plotsEvent2.png">
-        <img class="eventNameImg" src="./img/eventName.png">
-        <img class="attendingEventImg" src="./img/attendingEvent.png">
-        <div class="blurDiv"></div>
-    </div>
-    <div class="eventDiv">
-        <img class="eventImg" src="./img/plotsEvent3.png">
-        <img class="eventNameImg" src="./img/eventName.png">
-        <img class="attendingEventImg" src="./img/attendingEvent.png">
-        <div class="blurDiv"></div>
-    </div> -->
-
-
-    <!-- <div id="usrOnlineDiv">
-        <img id="usrImg" src="./img/activePfps.png">
-        <div id="usrOnlineNumberDiv">
-            <p id="usrOnlineNumText">
-                99+ Users Online
-            </p>
-        </div>
-    </div> -->
 
   </body>
   <script>
@@ -563,22 +603,5 @@
     });
   </script>
   <script>
-
-    const eventWrapper = document.querySelector('#eventWrapper');
-    const dots = document.querySelectorAll('.dot');
-
-    // Update the active dot based on scroll position
-    eventWrapper.addEventListener('scroll', () => {
-        const scrollPosition = eventWrapper.scrollLeft;
-        const itemWidth = eventWrapper.offsetWidth;
-
-        // Determine the active index
-        const activeIndex = Math.round(scrollPosition / itemWidth);
-
-        // Update dot indicator
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === activeIndex);
-        });
-    });
   </script>
 </html>
