@@ -340,8 +340,10 @@
     document.getElementById("inputField").addEventListener("input", () => {
         if (document.getElementById("inputField").value.trim()) {
             document.getElementById("unlockBtn").classList.add("colorBtn");
+            document.getElementById("unlockBtn").style.cursor = "pointer";
         } else{
             document.getElementById("unlockBtn").classList.remove("colorBtn");
+            document.getElementById("unlockBtn").style.cursor = "default";
         }
     });
   </script>

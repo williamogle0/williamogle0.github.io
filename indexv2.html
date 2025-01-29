@@ -91,6 +91,7 @@
             element.style.color = "rgba(69, 74, 92, 1)";
             element.style.border = "1px solid rgba(69, 74, 92, 1)";
             element.style.backgroundImage = "linear-gradient(black, black)";
+            element.style.cursor = "default";
         });
         document.getElementById("sendBtn").classList.add("colorBtn");
         document.getElementById("btnImg").src = "./img/VectorWhite.svg";
@@ -102,6 +103,7 @@
             element.style.color = "white";
             element.style.border = "1px solid transparent";
             element.style.backgroundImage = "linear-gradient(black, black), radial-gradient(circle at top left, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #587AED 100%)";
+            element.style.cursor = "pointer";
         });
     }
   </script>
@@ -207,9 +209,10 @@
         height: 66px;
         outline: none;
         resize: none;
+        font-size: 16px;
     }
     #sendBtn {
-        display: block;
+        display: flex;
         width: 28px;
         height: 28px;
 
@@ -222,15 +225,15 @@
         
         bottom: 5px;
         right: 5px;
+
+        align-items: center;
+        justify-content: center;
     }
     #btnImg{
-        width: 15px;
+        position: relative;
+        /* width: 15px; */
         height: 15px;
         display: flex;
-        justify-self: center;
-        align-self: space-evenly;
-        top: 4px;
-        left: 2px;
     }
     #suggestionDiv {
         margin-top: 15px;
@@ -271,7 +274,7 @@
         color: white;
 
         font-family: Poppins, sans-serif;
-        font-size: 14px;
+        font-size: 17px;
         font-weight: 600;
         line-height: 1.5; /* Improves text readability */
         text-align: center;
@@ -280,6 +283,9 @@
         height: auto; /* Ensures height adapts to content */
 
         margin-bottom: 20px;
+
+        cursor: pointer;
+
     }
     .suggestionText{
         margin: 5px 8px;
@@ -297,6 +303,8 @@
     }
     .colorBtn{
         background: linear-gradient(97.61deg, #587AED 0.59%, #BA37D6 34.8%, #E228BB 68.33%, #F25C4F 100%) !important;
+
+        cursor: pointer;
     }
 
     #eventsDiv{
